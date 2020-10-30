@@ -241,30 +241,30 @@ SELECT DATE_FORMAT(R.date_accessed, "%Y-%m-%d") as "RCM Access Date (YYYY-MM-DD)
 												FI.other_da_subprogram as "Othe DA Program",
 												CI.sacks_CAR AS "Immediate Previous Yield",
 												CI.kg_CAR AS "Immediate Previous Yield (kg)"
-  FROM phDraft.anReference as R
-  LEFT OUTER JOIN phDraft.anFarmerInfo as FI on FI.ref_id = R.ref_id
-  INNER JOIN phDraft.anFieldInfo as F on F.ref_id = R.ref_id
-  INNER JOIN phDraft.tblRegion as LR USING (region_id)
-  INNER JOIN phDraft.tblProvince as LP USING (province_id)
-  INNER JOIN phDraft.tblMunicipality as LM USING (municipality_id)
-  INNER JOIN phDraft.tblBarangay as LB ON LB.id = F.barangay_id 
-  INNER JOIN phDraft.anCropInfo as CI on CI.ref_id = R.ref_id
-  LEFT OUTER JOIN phDraft.tblVariety as V USING (variety_id)
+  FROM rasph.anreference as R
+  LEFT OUTER JOIN rasph.farmers as FI on FI.ref_id = R.ref_id
+  INNER JOIN rasph.fields as F on F.ref_id = R.ref_id
+  INNER JOIN rasph.tblregion as LR USING (region_id)
+  INNER JOIN rasph.tblprovince as LP USING (province_id)
+  INNER JOIN rasph.tblmunicipality as LM USING (municipality_id)
+  INNER JOIN rasph.tblbarangay as LB ON LB.id = F.barangay_id 
+  INNER JOIN rasph.ancropinfo as CI on CI.ref_id = R.ref_id
+  LEFT OUTER JOIN rasph.tblvariety as V USING (variety_id)
   LEFT OUTER JOIN phaas.usage_track as UT on UT.ref_id = R.ref_id
-  LEFT OUTER JOIN phDraft.anOutput as O on O.ref_id = R.ref_id
-  LEFT OUTER JOIN phDraft.anTrainerEntry as TE on TE.ref_id = R.ref_id
-  LEFT OUTER JOIN phDraft.anTrainerInfo as TI USING (trainer_id)
-  LEFT OUTER JOIN phDraft.anFieldOwner as FO USING (field_id)
-  LEFT OUTER JOIN phDraft.anOrganics as OO on OO.ref_id = R.ref_id
-  LEFT OUTER JOIN phDraft.anOtherOrganics as OOO on OOO.ref_id = R.ref_id
-  LEFT OUTER JOIN phDraft.anSessionExtension as SE on SE.ref_id = R.ref_id
-  LEFT OUTER JOIN phDraft.anExtensionInfo as EI USING (extension_id)
-  LEFT OUTER JOIN phDraft.anLocalTechnician as LT on LT.ref_id = R.ref_id
-  LEFT OUTER JOIN phDraft.anRecYield as RY on RY.ref_id = R.ref_id
-  LEFT OUTER JOIN phDraft.anRecYield2 as RY2 on RY2.ref_id = R.ref_id
-  LEFT OUTER JOIN phDraft.anCMOutput as CM on CM.ref_id = R.ref_id
-  LEFT OUTER JOIN phDraft.anCMOutput2 as CM2 on CM2.ref_id = R.ref_id
-  LEFT OUTER JOIN phDraft.anOutput2 as O2 ON (O2.ref_id = O.ref_id AND O2.rec_type = O.rec_type)
-  LEFT OUTER JOIN phDraft.tblFITS as TF ON F.municipality_id = TF.municipality_id
+  LEFT OUTER JOIN rasph.anoutput as O on O.ref_id = R.ref_id
+  LEFT OUTER JOIN rasph.antrainerentry as TE on TE.ref_id = R.ref_id
+  LEFT OUTER JOIN rasph.antrainerinfo as TI USING (trainer_id)
+  LEFT OUTER JOIN rasph.anfieldowner as FO USING (field_id)
+  LEFT OUTER JOIN rasph.anorganics as OO on OO.ref_id = R.ref_id
+  LEFT OUTER JOIN rasph.anotherorganics as OOO on OOO.ref_id = R.ref_id
+  LEFT OUTER JOIN rasph.ansessionextension as SE on SE.ref_id = R.ref_id
+  LEFT OUTER JOIN rasph.anextensioninfo as EI USING (extension_id)
+  LEFT OUTER JOIN rasph.anlocaltechnician as LT on LT.ref_id = R.ref_id
+  LEFT OUTER JOIN rasph.anrecyield as RY on RY.ref_id = R.ref_id
+  LEFT OUTER JOIN rasph.anrecyield2 as RY2 on RY2.ref_id = R.ref_id
+  LEFT OUTER JOIN rasph.ancmoutput as CM on CM.ref_id = R.ref_id
+  LEFT OUTER JOIN rasph.ancmoutput2 as CM2 on CM2.ref_id = R.ref_id
+  LEFT OUTER JOIN rasph.anoutput2 as O2 ON (O2.ref_id = O.ref_id AND O2.rec_type = O.rec_type)
+  LEFT OUTER JOIN rasph.tblFITS as TF ON F.municipality_id = TF.municipality_id
 	WHERE R.category = "0" AND R.test = "1"
-	AND R.date_accessed between "2020-02-01 00:00:00" AND "2020-02-25 23:59:59"
+	AND R.date_accessed between "2020-02-01 00:00:00" AND "2020-02-25 23:59:59" LIMIT 10
